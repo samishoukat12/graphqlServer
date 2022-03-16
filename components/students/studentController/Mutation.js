@@ -12,7 +12,7 @@ module.exports.addStudent = {
     },
     resolve(parent, args) {
         const newStudent = new studentsCollection({
-          
+
             checkbox: args.checkbox
         });
 
@@ -31,25 +31,28 @@ module.exports.updateStudent = {
         id: { type: GraphQLString },
         title: { type: GraphQLString },
         home: { type: GraphQLString },
-        chores:{type:GraphQLString},
-        celebration:{type:GraphQLString},
-        checkbox:{type:GraphQLBoolean}
-        
+        chores: { type: GraphQLString },
+        celebration: { type: GraphQLString },
+        checkbox: { type: GraphQLBoolean },
+        homeStatus: { type: GraphQLBoolean },
+        time: { type: GraphQLBoolean },
+        diamond: { type: GraphQLBoolean },
+
     },
     resolve: async (parent, args) => {
         const _id = args.id;
 
         const updateObj = {
-            checkbox:args.checkbox 
+            checkbox: args.checkbox
         }
-        await studentsCollection.map((item)=>{
-            if(args.id==item.id){
-             return args 
+        await studentsCollection.map((item) => {
+            if (args.id == item.id) {
+                return args
             }
-            else{
-            return item
+            else {
+                return item
             }
-            })
+        })
 
         return args
     }
