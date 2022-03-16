@@ -3,6 +3,7 @@ const userType = require('../objectTypes/UserType');
 const studentsCollection = require('../StudentModal');
 const statusType = require('../objectTypes/StatusType');
 const { GraphQLBoolean } = require('graphql');
+
 module.exports.addStudent = {
     type: userType,
     args: {
@@ -28,7 +29,12 @@ module.exports.updateStudent = {
     type: userType,
     args: {
         id: { type: GraphQLString },
-        checkbox: { type: GraphQLBoolean },
+        title: { type: GraphQLString },
+        home: { type: GraphQLString },
+        chores:{type:GraphQLString},
+        celebration:{type:GraphQLString},
+        checkbox:{type:GraphQLBoolean}
+        
     },
     resolve: async (parent, args) => {
         const _id = args.id;
@@ -36,17 +42,14 @@ module.exports.updateStudent = {
         const updateObj = {
             checkbox:args.checkbox 
         }
-        await studentsCollection.findByIdAndUpdate(
-            _id,
-            updateObj,
-            { new: true },
-            console.log("Document id: ", _id),
-            console.log("Document Data: ", updateObj),
-            (err, data) => {
-                console.log("Data is Updated...success:", data);
-                //   console.log("err", err);
+        await studentsCollection.map((item)=>{
+            if(args.id==item.id){
+             return args 
             }
-        );
+            else{
+            return item
+            }
+            })
 
         return args
     }
