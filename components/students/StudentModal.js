@@ -19,7 +19,7 @@ var studentSchema =
             home: 'Home',
             chores: 'Chores',
             time:false,
-            diamond:true,
+            diamond:false,
             celebration: "Celebrations",
             checkbox:false
         },
