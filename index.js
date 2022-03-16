@@ -1,5 +1,5 @@
 const express = require('express');
-const Port = 5000;
+const PORT = process.env.PORT || 8080;
 const { graphqlHTTP } = require('express-graphql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -17,7 +17,7 @@ app.use(cors());
 
 app.use('/graphql',
     graphqlHTTP({
-        schema:schema,
+        schema: schema,
         graphiql: true,
     })
 )
@@ -29,6 +29,7 @@ app.use('/graphql',
 //     res.send(data);
 // });
 
-app.listen(Port, () => {
-    console.log('Server is running on ' + Port);
-})
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
+});

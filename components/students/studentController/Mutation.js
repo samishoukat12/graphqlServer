@@ -6,18 +6,12 @@ const { GraphQLBoolean } = require('graphql');
 module.exports.addStudent = {
     type: userType,
     args: {
-        title: { type: GraphQLString },
-        home: { type: GraphQLString },
-        chores: { type: GraphQLString },
-        celebration: { type: GraphQLString },
+
         checkbox: { type: GraphQLBoolean },
     },
     resolve(parent, args) {
         const newStudent = new studentsCollection({
-            title: args.title,
-            home: args.home,
-            chores: args.chores,
-            celebration: args.celebration,
+          
             checkbox: args.checkbox
         });
 
@@ -34,20 +28,12 @@ module.exports.updateStudent = {
     type: userType,
     args: {
         id: { type: GraphQLString },
-        title: { type: GraphQLString },
-        home: { type: GraphQLString },
-        chores: { type: GraphQLString },
-        celebration: { type: GraphQLString },
         checkbox: { type: GraphQLBoolean },
     },
     resolve: async (parent, args) => {
         const _id = args.id;
 
         const updateObj = {
-            title: args.title,
-            home: args.home,
-            chores: args.chores,
-            celebration: args.celebration,
             checkbox:args.checkbox 
         }
         await studentsCollection.findByIdAndUpdate(
