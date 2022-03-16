@@ -26,7 +26,7 @@ var studentSchema =
         {
             id: '222222222',
             title: 'Mow the lawn',
-            homeStatus:true,
+            homeStatus:false,
             home: 'Home',
             chores: 'Chores',
             time:true,
